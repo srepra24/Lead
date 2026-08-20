@@ -10,34 +10,32 @@
     * { -webkit-tap-highlight-color: transparent; }
     body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
-      transition: background-image 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background-image 0.5s ease-in-out;
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
-    .step { display: none; }
-    .step.active { display: block; animation: smoothSlide 0.35s ease-out; }
+    .step-section { display: none; }
+    .step-section.active { display: block; animation: smoothSlide 0.3s ease-out; }
     @keyframes smoothSlide { 
-      from { opacity: 0; transform: translateY(10px) scale(0.99); } 
-      to { opacity: 1; transform: translateY(0) scale(1); } 
+      from { opacity: 0; transform: translateY(8px); } 
+      to { opacity: 1; transform: translateY(0); } 
     }
-    /* Frosted Glass UI */
     .glass-card {
-      background: rgba(15, 23, 42, 0.88);
+      background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
     }
     .option-btn {
-      background: rgba(30, 41, 59, 0.75);
-      backdrop-filter: blur(8px);
+      background: rgba(30, 41, 59, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s ease;
     }
     .option-btn:hover, .option-btn:active {
-      background: rgba(45, 212, 191, 0.18);
-      border-color: rgba(45, 212, 191, 0.6);
+      background: rgba(45, 212, 191, 0.2);
+      border-color: rgba(45, 212, 191, 0.7);
       transform: translateY(-2px);
     }
   </style>
@@ -55,103 +53,103 @@
     
     <!-- Progress Bar -->
     <div class="w-full bg-slate-800/80 h-1.5 rounded-full mb-5 sm:mb-6 overflow-hidden">
-      <div id="progressBar" class="bg-gradient-to-r from-teal-400 to-emerald-400 h-full w-1/5 transition-all duration-500 ease-out"></div>
+      <div id="progressBar" class="bg-gradient-to-r from-teal-400 to-emerald-400 h-full w-1/5 transition-all duration-300 ease-out"></div>
     </div>
 
-    <!-- Step 1: Specialization (0 Points) -->
-    <div class="step active" id="step1">
+    <!-- Step 1 -->
+    <div class="step-section active" id="step1">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-1.5 leading-snug">What is your clinic's specialty?</h2>
-      <p class="text-xs sm:text-sm text-slate-300 mb-4">Select your practice category to tailor the patient acquisition audit.</p>
+      <p class="text-xs sm:text-sm text-slate-300 mb-4">Select your practice category to tailor the audit.</p>
       <div class="space-y-2.5">
-        <button onclick="nextStep(1, 'Category', 'Dental / Aesthetics', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
+        <button type="button" onclick="goToStep(1, 'Category', 'Dental / Aesthetics', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
           <span class="text-2xl shrink-0">🦷</span>
-          <div><p class="font-bold text-white text-sm sm:text-base">Dental, Skin & Hair Clinic</p><p class="text-[11px] sm:text-xs text-slate-400">Cosmetology, Aesthetics & Dentistry</p></div>
+          <div><p class="font-bold text-white text-sm sm:text-base">Dental, Skin & Hair Clinic</p><p class="text-[11px] text-slate-400">Cosmetology, Aesthetics & Dentistry</p></div>
         </button>
-        <button onclick="nextStep(1, 'Category', 'General / Pediatrics', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
+        <button type="button" onclick="goToStep(1, 'Category', 'General / Pediatrics', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
           <span class="text-2xl shrink-0">🩺</span>
-          <div><p class="font-bold text-white text-sm sm:text-base">General Medicine & Pediatrics</p><p class="text-[11px] sm:text-xs text-slate-400">Family Physician, Internal Medicine & Child Care</p></div>
+          <div><p class="font-bold text-white text-sm sm:text-base">General Medicine & Pediatrics</p><p class="text-[11px] text-slate-400">Family Physician, Internal Medicine</p></div>
         </button>
-        <button onclick="nextStep(1, 'Category', 'Ortho / Physio', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
+        <button type="button" onclick="goToStep(1, 'Category', 'Ortho / Physio', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
           <span class="text-2xl shrink-0">🦴</span>
-          <div><p class="font-bold text-white text-sm sm:text-base">Orthopedic & Physiotherapy</p><p class="text-[11px] sm:text-xs text-slate-400">Joints, Spine & Pain Management</p></div>
+          <div><p class="font-bold text-white text-sm sm:text-base">Orthopedic & Physiotherapy</p><p class="text-[11px] text-slate-400">Joints, Spine & Pain Management</p></div>
         </button>
-        <button onclick="nextStep(1, 'Category', 'Multi / Super Specialty', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
+        <button type="button" onclick="goToStep(1, 'Category', 'Multi / Super Specialty', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl flex items-center gap-3">
           <span class="text-2xl shrink-0">🏥</span>
-          <div><p class="font-bold text-white text-sm sm:text-base">Multi / Super Specialty</p><p class="text-[11px] sm:text-xs text-slate-400">Polyclinic, Eye, ENT, Gynecology & Others</p></div>
+          <div><p class="font-bold text-white text-sm sm:text-base">Multi / Super Specialty</p><p class="text-[11px] text-slate-400">Polyclinic, Eye, ENT, Gynecology & Others</p></div>
         </button>
       </div>
     </div>
 
-    <!-- Step 2: Patient Source (6% to 25%) -->
-    <div class="step" id="step2">
+    <!-- Step 2 -->
+    <div class="step-section" id="step2">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-1.5 leading-snug">How do new patients find you?</h2>
-      <p class="text-xs sm:text-sm text-slate-300 mb-4">What is your primary patient acquisition channel currently?</p>
+      <p class="text-xs sm:text-sm text-slate-300 mb-4">What is your primary acquisition channel?</p>
       <div class="space-y-2.5">
-        <button onclick="nextStep(2, 'Current_Source', 'Word of Mouth / Walk-ins', 12)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">🗣️ Strictly Word of Mouth & Walk-ins</button>
-        <button onclick="nextStep(2, 'Current_Source', 'Google Maps / Search', 20)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">📍 Google Maps & Local Online Search</button>
-        <button onclick="nextStep(2, 'Current_Source', 'Social Media / Ads', 25)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">📱 Social Media (Instagram/Facebook) & Ads</button>
-        <button onclick="nextStep(2, 'Current_Source', 'Not Enough Inquiries', 6)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">⚠️ Inconsistent or insufficient patient inquiries</button>
+        <button type="button" onclick="goToStep(2, 'Current_Source', 'Word of Mouth / Walk-ins', 12)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">🗣️ Strictly Word of Mouth & Walk-ins</button>
+        <button type="button" onclick="goToStep(2, 'Current_Source', 'Google Maps / Search', 20)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">📍 Google Maps & Local Online Search</button>
+        <button type="button" onclick="goToStep(2, 'Current_Source', 'Social Media / Ads', 25)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">📱 Social Media (Instagram/Facebook) & Ads</button>
+        <button type="button" onclick="goToStep(2, 'Current_Source', 'Not Enough Inquiries', 6)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">⚠️ Inconsistent or insufficient inquiries</button>
       </div>
     </div>
 
-    <!-- Step 3: Google Maps Visibility (6% to 32%) -->
-    <div class="step" id="step3">
+    <!-- Step 3 -->
+    <div class="step-section" id="step3">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-1.5 leading-snug">Google Maps & Search Ranking?</h2>
-      <p class="text-xs sm:text-sm text-slate-300 mb-4">When patients search locally, does your profile appear on top?</p>
+      <p class="text-xs sm:text-sm text-slate-300 mb-4">When patients search locally, does your clinic show on top?</p>
       <div class="space-y-2.5">
-        <button onclick="nextStep(3, 'Maps_Status', 'Top 3 (Good Reviews)', 32)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">⭐ Top 3 ranking with active 50+ reviews</button>
-        <button onclick="nextStep(3, 'Maps_Status', 'Visible Low Reviews', 20)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">📉 Profile exists, but low reviews & poor rank</button>
-        <button onclick="nextStep(3, 'Maps_Status', 'Not Ranking / Unoptimized', 6)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">❌ Not visible / Not properly optimized yet</button>
-        <button onclick="nextStep(3, 'Maps_Status', 'Not Sure', 14)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">❓ Not sure about current local position</button>
+        <button type="button" onclick="goToStep(3, 'Maps_Status', 'Top 3 (Good Reviews)', 32)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">⭐ Top 3 ranking with active 50+ reviews</button>
+        <button type="button" onclick="goToStep(3, 'Maps_Status', 'Visible Low Reviews', 20)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">📉 Profile exists, but low reviews & poor rank</button>
+        <button type="button" onclick="goToStep(3, 'Maps_Status', 'Not Ranking / Unoptimized', 6)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">❌ Not visible / Not properly optimized yet</button>
+        <button type="button" onclick="goToStep(3, 'Maps_Status', 'Not Sure', 14)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">❓ Not sure about current local position</button>
       </div>
     </div>
 
-    <!-- Step 4: Growth Goal (0 Points) -->
-    <div class="step" id="step4">
+    <!-- Step 4 -->
+    <div class="step-section" id="step4">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-1.5 leading-snug">Primary target for next 60 days?</h2>
       <p class="text-xs sm:text-sm text-slate-300 mb-4">What is your top priority for clinic expansion?</p>
       <div class="space-y-2.5">
-        <button onclick="nextStep(4, 'Primary_Goal', '25-50 New Appointments', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">🎯 +25 to 50 predictable monthly appointments</button>
-        <button onclick="nextStep(4, 'Primary_Goal', 'High-Ticket Treatments', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">💎 Increase high-margin procedures & treatments</button>
-        <button onclick="nextStep(4, 'Primary_Goal', 'Dominate Local Market', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">👑 Become the #1 highest-rated clinic in our area</button>
+        <button type="button" onclick="goToStep(4, 'Primary_Goal', '25-50 New Appointments', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">🎯 +25 to 50 predictable monthly appointments</button>
+        <button type="button" onclick="goToStep(4, 'Primary_Goal', 'High-Ticket Treatments', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">💎 Increase high-margin procedures & treatments</button>
+        <button type="button" onclick="goToStep(4, 'Primary_Goal', 'Dominate Local Market', 0)" class="w-full text-left p-3.5 sm:p-4 option-btn rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold">👑 Become the #1 highest-rated clinic in our area</button>
       </div>
     </div>
 
-    <!-- Step 5: Contact Lead Form -->
-    <div class="step" id="step5">
+    <!-- Step 5: Form -->
+    <div class="step-section" id="step5">
       <h2 class="text-xl sm:text-2xl font-bold text-white mb-1 leading-snug">Your Visibility Audit is Ready!</h2>
-      <p class="text-xs sm:text-sm text-slate-300 mb-4">Enter your practice details to generate your diagnostic report.</p>
+      <p class="text-xs sm:text-sm text-slate-300 mb-4">Enter your practice details to unlock the report.</p>
       
       <div class="space-y-3">
         <div>
-          <label class="text-[11px] text-slate-300 font-bold uppercase tracking-wider">Clinic or Doctor Name *</label>
-          <input type="text" id="clinicName" placeholder="e.g. Prime Care Dental / Dr. Rajesh" class="w-full mt-1 p-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400 text-sm">
+          <label class="text-[11px] text-slate-300 font-bold uppercase tracking-wider">Doctor / Owner Name *</label>
+          <input type="text" id="doctorName" placeholder="e.g. Dr. Rajesh Kumar" class="w-full mt-1 p-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400 text-sm">
+        </div>
+        <div>
+          <label class="text-[11px] text-slate-300 font-bold uppercase tracking-wider">Clinic Name *</label>
+          <input type="text" id="clinicName" placeholder="e.g. Prime Care Dental Clinic" class="w-full mt-1 p-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400 text-sm">
         </div>
         <div>
           <label class="text-[11px] text-slate-300 font-bold uppercase tracking-wider">WhatsApp Phone Number *</label>
           <input type="tel" id="phone" placeholder="9876543210" maxlength="10" class="w-full mt-1 p-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400 text-sm">
-        </div>
-        <div>
-          <label class="text-[11px] text-slate-300 font-bold uppercase tracking-wider">Email Address (Optional)</label>
-          <input type="email" id="email" placeholder="doctor@clinic.com" class="w-full mt-1 p-3 bg-slate-900/90 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-teal-400 text-sm">
+          <p id="phoneError" class="text-rose-400 text-[11px] mt-1 hidden"></p>
         </div>
 
-        <button type="button" id="submitBtn" onclick="submitAudit()" class="w-full py-3.5 bg-gradient-to-r from-teal-400 to-emerald-400 hover:from-teal-300 hover:to-emerald-300 text-slate-950 font-extrabold rounded-xl shadow-lg transition-all transform active:scale-95 text-sm sm:text-base mt-2">
+        <button type="button" id="submitBtn" onclick="handleFormSubmit()" class="w-full py-3.5 bg-gradient-to-r from-teal-400 to-emerald-400 hover:from-teal-300 hover:to-emerald-300 text-slate-950 font-extrabold rounded-xl shadow-lg transition-all transform active:scale-95 text-sm sm:text-base mt-2">
           Unlock My Clinic Visibility Score (%) →
         </button>
       </div>
     </div>
 
-    <!-- Step 6: 2-Column Comparison Result Screen -->
-    <div class="step text-center result-screen" id="resultStep">
+    <!-- Step 6: Result Screen (Redirect happens only when button below is clicked) -->
+    <div class="step-section text-center" id="resultStep">
       <span class="text-[10px] sm:text-xs uppercase tracking-widest text-rose-400 font-bold bg-rose-950/80 px-3 py-1 rounded-full border border-rose-500/30">Analysis Complete</span>
       <h2 class="text-lg sm:text-xl font-bold text-white mt-3" id="resClinicName">Practice Health Diagnosis</h2>
       <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5 mb-4">Current Digital Health vs. 60-Day Scaling Potential</p>
       
       <!-- 2 Columns Comparison -->
       <div class="grid grid-cols-2 gap-2.5 sm:gap-4 my-3">
-        
-        <!-- Left Column: Current Score (Always <60%) -->
+        <!-- Current Score -->
         <div class="bg-gradient-to-b from-rose-950/50 to-slate-900/95 border border-rose-500/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-lg shadow-rose-950/40">
           <span class="text-[10px] sm:text-xs font-bold text-rose-400 uppercase tracking-wide">Current Score</span>
           <div class="my-2 relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full border-4 border-rose-500/40 bg-rose-950/60 shadow-[0_0_20px_rgba(244,63,94,0.3)]">
@@ -161,7 +159,7 @@
           <p class="text-[9px] sm:text-[10px] text-slate-400 mt-1.5 text-center leading-tight">Patient leak to competitors</p>
         </div>
 
-        <!-- Right Column: Target Score (GREEN) -->
+        <!-- Target Score -->
         <div class="bg-gradient-to-b from-emerald-950/50 to-slate-900/95 border border-emerald-500/50 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-lg shadow-emerald-950/40 relative overflow-hidden">
           <div class="absolute top-0 right-0 bg-emerald-500 text-slate-950 text-[8px] sm:text-[9px] font-extrabold px-1.5 py-0.5 rounded-bl uppercase">Potential</div>
           <span class="text-[10px] sm:text-xs font-bold text-emerald-400 uppercase tracking-wide">60-Day Target</span>
@@ -171,7 +169,6 @@
           <span class="text-[10px] sm:text-xs font-semibold text-emerald-300 bg-emerald-950/90 px-2 py-0.5 rounded-full border border-emerald-500/40">🚀 Market Leader</span>
           <p class="text-[9px] sm:text-[10px] text-slate-300 mt-1.5 text-center font-medium leading-tight">+25 to 45 New Patients/mo</p>
         </div>
-
       </div>
 
       <!-- Insight Box -->
@@ -180,9 +177,9 @@
         <p class="flex items-start gap-1.5">📍 <span><b>Srepra 60-Day System:</b> Local GMB SEO + Automated Patient Booking funnel scales your practice score to <b>94%</b> consistently.</span></p>
       </div>
 
-      <!-- WhatsApp Action Button -->
-      <a id="whatsappBtn" href="https://wa.me/918520889953?text=Hello%20Srepra,%20I%20completed%20the%20Clinic%20Audit%20and%20would%20like%20to%20receive%20my%2060-Day%20Growth%20Roadmap." target="_blank" class="block w-full py-3.5 bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-extrabold rounded-xl shadow-lg transition-all transform active:scale-95 text-xs sm:text-sm">
-        📱 Claim 60-Day Growth Roadmap on WhatsApp
+      <!-- User triggers WhatsApp manually here -->
+      <a id="whatsappBtn" href="https://wa.me/919347069294" target="_blank" class="block w-full py-4 bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-extrabold rounded-xl shadow-lg transition-all transform active:scale-95 text-xs sm:text-sm animate-pulse">
+        📱 Claim 60-Day Growth Roadmap on WhatsApp →
       </a>
     </div>
 
@@ -190,122 +187,141 @@
 
   <script>
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWMW_0VPJKiiQlmFRSIR0I_oLZO0ro16hNNUrme0cfhHIJn24Cm6jTHAxbJJ2vBvtm/exec';
+    const TARGET_WHATSAPP_NUMBER = '919347069294';
 
-    const stepBackgrounds = [
-      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1920&q=80')", 
-      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80')", 
-      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1920&q=80')", 
-      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1920&q=80')", 
-      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80')", 
-      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1920&q=80')"  
+    const backgrounds = [
+      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1920&q=80')",
+      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80')",
+      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1920&q=80')",
+      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1920&q=80')",
+      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80')",
+      "linear-gradient(rgba(10, 15, 30, 0.88), rgba(10, 15, 30, 0.95)), url('https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1920&q=80')"
     ];
 
-    document.body.style.backgroundImage = stepBackgrounds[0];
+    document.body.style.backgroundImage = backgrounds[0];
 
-    let quizData = { Category: '', Current_Source: '', Maps_Status: '', Primary_Goal: '' };
-    let totalScore = 0;
+    const quizData = { Category: '', Current_Source: '', Maps_Status: '', Primary_Goal: '' };
+    let calculatedScore = 0;
 
-    function nextStep(current, key, value, points) {
-      quizData[key] = value;
-      totalScore += points;
+    function goToStep(currentStepNum, dataKey, dataVal, points) {
+      if (dataKey) quizData[dataKey] = dataVal;
+      calculatedScore += points;
 
-      document.getElementById(`step${current}`).classList.remove('active');
-      const next = current + 1;
-      document.getElementById(`step${next}`).classList.add('active');
+      const currentEl = document.getElementById('step' + currentStepNum);
+      const nextStepNum = currentStepNum + 1;
+      const nextEl = document.getElementById('step' + nextStepNum);
 
-      if (stepBackgrounds[next]) {
-        document.body.style.backgroundImage = stepBackgrounds[next];
+      if (currentEl) currentEl.classList.remove('active');
+      if (nextEl) nextEl.classList.add('active');
+
+      if (backgrounds[nextStepNum - 1]) {
+        document.body.style.backgroundImage = backgrounds[nextStepNum - 1];
       }
 
-      document.getElementById('stepBadge').innerText = `Step ${next} of 5`;
-      const progress = (next / 5) * 100;
-      document.getElementById('progressBar').style.width = `${progress}%`;
+      const badge = document.getElementById('stepBadge');
+      const bar = document.getElementById('progressBar');
+      if (badge) badge.innerText = 'Step ' + nextStepNum + ' of 5';
+      if (bar) bar.style.width = ((nextStepNum / 5) * 100) + '%';
     }
 
-    async function submitAudit() {
-      const name = document.getElementById('clinicName').value.trim();
+    function checkValidPhone(phoneNum) {
+      const clean = phoneNum.replace(/\D/g, '');
+      if (!/^[6-9]\d{9}$/.test(clean)) return false;
+      if (/^(\d)\1{9}$/.test(clean)) return false;
+      const dummies = ['1234567890', '9876543210', '0123456789', '9898989898', '9988776655'];
+      return !dummies.includes(clean);
+    }
+
+    function handleFormSubmit() {
+      const doctor = document.getElementById('doctorName').value.trim();
+      const clinic = document.getElementById('clinicName').value.trim();
       const phone = document.getElementById('phone').value.trim();
-      const email = document.getElementById('email').value.trim();
+      const errEl = document.getElementById('phoneError');
 
-      if (!name) {
-        alert('Please enter your Clinic or Doctor name.');
+      if (errEl) errEl.classList.add('hidden');
+
+      if (!doctor) {
+        alert('Please enter the Doctor or Owner name.');
         return;
       }
-      if (!phone || phone.length < 10) {
-        alert('Please enter a valid 10-digit mobile number.');
+      if (!clinic) {
+        alert('Please enter your Clinic name.');
         return;
       }
-
-      const submitBtn = document.getElementById('submitBtn');
-      submitBtn.disabled = true;
-      submitBtn.innerText = "Analyzing Patient Flow...";
-
-      if (totalScore === 0) totalScore = 18;
-
-      const formData = new FormData();
-      formData.append('Clinic_Doctor_Name', name);
-      formData.append('Phone', phone);
-      formData.append('Email', email);
-      formData.append('Category', quizData.Category || 'Speciality Clinic');
-      formData.append('Current_Source', quizData.Current_Source || 'Word of Mouth');
-      formData.append('Maps_Status', quizData.Maps_Status || 'Low Visibility');
-      formData.append('Primary_Goal', quizData.Primary_Goal || 'Patient Inflow');
-      formData.append('Growth_Score', `${totalScore}%`);
-
-      try {
-        if (SCRIPT_URL && !SCRIPT_URL.includes('YOUR_GOOGLE')) {
-          fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' });
+      if (!checkValidPhone(phone)) {
+        if (errEl) {
+          errEl.innerText = 'Please enter a valid 10-digit mobile number (starting with 6, 7, 8, or 9).';
+          errEl.classList.remove('hidden');
+        } else {
+          alert('Please enter a valid 10-digit mobile number.');
         }
-      } catch (err) {
-        console.log('Lead submission error:', err);
+        return;
       }
 
-      // Dynamic WhatsApp Redirect URL
-      const waBtn = document.getElementById('whatsappBtn');
-      const customMsg = encodeURIComponent(`Hello Srepra, I am ${name}. I completed the Clinic Visibility Audit (Score: ${totalScore}%). I would like to receive our custom 60-Day Patient Growth Roadmap.`);
-      waBtn.href = `https://wa.me/918520889953?text=${customMsg}`;
+      const btn = document.getElementById('submitBtn');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = 'Analyzing Patient Flow...';
+      }
 
-      // Switch to Result View
+      if (calculatedScore === 0) calculatedScore = 18;
+
+      const fd = new FormData();
+      fd.append('Doctor_Name', doctor);
+      fd.append('Clinic_Name', clinic);
+      fd.append('Phone', phone);
+      fd.append('Category', quizData.Category || 'Speciality Clinic');
+      fd.append('Current_Source', quizData.Current_Source || 'Word of Mouth');
+      fd.append('Maps_Status', quizData.Maps_Status || 'Low Visibility');
+      fd.append('Primary_Goal', quizData.Primary_Goal || 'Patient Inflow');
+      fd.append('Growth_Score', calculatedScore + '%');
+
+      if (SCRIPT_URL && SCRIPT_URL.startsWith('http')) {
+        try {
+          fetch(SCRIPT_URL, { method: 'POST', body: fd, mode: 'no-cors' });
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // Configure personalized WhatsApp Message Link
+      const msg = encodeURIComponent('Hello Srepra, I am ' + doctor + ' from ' + clinic + '. I completed the Clinic Visibility Audit (Score: ' + calculatedScore + '%). I would like to receive our custom 60-Day Patient Growth Roadmap.');
+      const waUrl = 'https://wa.me/' + TARGET_WHATSAPP_NUMBER + '?text=' + msg;
+
+      const waBtn = document.getElementById('whatsappBtn');
+      if (waBtn) waBtn.href = waUrl;
+
+      // Show Result View (No auto redirect)
       document.getElementById('step5').classList.remove('active');
       document.getElementById('resultStep').classList.add('active');
-      document.getElementById('stepBadge').innerText = "Audit Ready";
+      document.getElementById('stepBadge').innerText = 'Audit Ready';
       document.getElementById('progressBar').style.width = '100%';
-      document.getElementById('resClinicName').innerText = `${name}`;
+      document.getElementById('resClinicName').innerText = clinic;
+      document.body.style.backgroundImage = backgrounds[5];
 
-      document.body.style.backgroundImage = stepBackgrounds[5];
-
-      // Dual Countup Animation
-      let currentPercent = 0;
-      let targetPercent = 0;
-      const finalTarget = 94;
-
-      const timer = setInterval(() => {
-        let updated = false;
-
-        if (currentPercent < totalScore) {
-          currentPercent++;
-          document.getElementById('currentScoreValue').innerText = `${currentPercent}%`;
-          updated = true;
+      let cur = 0, tar = 0;
+      const countTimer = setInterval(() => {
+        let active = false;
+        if (cur < calculatedScore) {
+          cur++;
+          document.getElementById('currentScoreValue').innerText = cur + '%';
+          active = true;
         }
-
-        if (targetPercent < finalTarget) {
-          targetPercent += 2;
-          if (targetPercent > finalTarget) targetPercent = finalTarget;
-          document.getElementById('targetScoreValue').innerText = `${targetPercent}%`;
-          updated = true;
+        if (tar < 94) {
+          tar += 2;
+          if (tar > 94) tar = 94;
+          document.getElementById('targetScoreValue').innerText = tar + '%';
+          active = true;
         }
-
-        if (!updated) {
-          clearInterval(timer);
-        }
+        if (!active) clearInterval(countTimer);
       }, 25);
 
-      if (totalScore < 30) {
-        document.getElementById('scoreStatus').innerText = "⚠️ High Drop-off";
-      } else if (totalScore < 50) {
-        document.getElementById('scoreStatus').innerText = "⚡ Poor Visibility";
+      if (calculatedScore < 30) {
+        document.getElementById('scoreStatus').innerText = '⚠️ High Drop-off';
+      } else if (calculatedScore < 50) {
+        document.getElementById('scoreStatus').innerText = '⚡ Poor Visibility';
       } else {
-        document.getElementById('scoreStatus').innerText = "📈 Moderate Reach";
+        document.getElementById('scoreStatus').innerText = '📈 Moderate Reach';
       }
     }
   </script>
